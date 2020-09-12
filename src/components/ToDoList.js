@@ -5,10 +5,25 @@ import { useObserver } from 'mobx-react';
 const ToDoList = () => {
     const store = useContext(StoreContext);
 
+    const renderList = () => {
+        if (store.todos.length >= 1) {
+            return (
+                <ul>
+                    {store.todos.map((task) => <li>{task}</li>)}
+                </ul>
+            )
+        } else {
+            return (
+                <div>
+                    <h3>Type something to insert in the list...</h3>
+                </div>
+            )
+        }
+    }
     return useObserver(() => (
-        <ul>
-            {store.todos.map((task) => <li>{task}</li>)}
-        </ul>
+        <div>
+            {renderList()}
+        </div>
     ))
 }
 

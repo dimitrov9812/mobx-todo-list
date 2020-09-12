@@ -3,6 +3,7 @@ import { useLocalStore } from 'mobx-react';
 import ToDoHeader from './components/ToDoHeader';
 import ToDoForm from './components/TodoForm';
 import ToDoList from './components/ToDoList';
+import { mainApp } from './components/App.style';
 
 export const StoreContext = React.createContext();
 
@@ -14,6 +15,9 @@ const StoreProvider = ({ children }) => {
         },
         get taskCount() {
             return store.todos.length;
+        },
+        clear: () => {
+            store.todos = [];
         }
     }));
 
@@ -27,10 +31,12 @@ const StoreProvider = ({ children }) => {
 const App = () => {
     return (
         <StoreProvider>
-            <div>
-                <ToDoHeader />
-                <ToDoList />
-                <ToDoForm />
+            <div style={mainApp.wrap}>
+                <div style={mainApp.container}>
+                    <ToDoHeader />
+                    <ToDoList />
+                    <ToDoForm />
+                </div>
             </div>
         </StoreProvider>
     )
